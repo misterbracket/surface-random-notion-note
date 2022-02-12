@@ -1,7 +1,7 @@
 {
 	"name": "@maxklammer/surface-random-notion-note",
 	"description": "Will open a random notion note",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"license": "UNLICENSED",
 	"repository": {
 		"type": "git",
