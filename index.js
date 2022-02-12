@@ -31,6 +31,7 @@ let databaseId = '';
 // - figure out token store ✅
 // - pretty logs ✅
 // - open page in browser ✅
+// - paginate databases
 // - button to open in browser
 // - open on start up
 
@@ -72,10 +73,8 @@ async function getAllNotes() {
 function getRandomNote(allNotes) {
 	const randomPageIdx = random(0, allNotes.length);
 	const note = allNotes[randomPageIdx];
-	const [name] = note.properties.Name.title;
 	const url = note.url;
-	logSuccess(`📒 Your random Note of the day is: ${name.plain_text}`);
-	logInfo(`🔗 ${url}`);
+	logSuccess(`📒 Your random Note of the day is: \n 🔗 ${url}`);
 	return note;
 }
 
@@ -86,7 +85,7 @@ async function openUrlInBrowser(url) {
 
 (async () => {
 	init();
-	~input.includes(`help`) && cli.showHelp(0);
+	input.includes(`help`) && cli.showHelp(0);
 	debug && logInfo(flags);
 	databaseId = await getRandomeDatabaseId();
 	const allNotes = await getAllNotes();
