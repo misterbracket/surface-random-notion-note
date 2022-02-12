@@ -19,14 +19,16 @@ const { debug } = flags;
 
 const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
+// eslint-disable-next-line no-undef
 const notion = new Client({ auth: process.env.NOTION_KEY });
 
 let databaseId = '';
 
 // TODO:
-// - Add support for multiple notion database
+// - Add support for multiple notion databases ✅
 // - add pagination ✅
-// - figure out token store
+// - add readme ✅
+// - figure out token store ✅
 // - pretty logs ✅
 // - open page in browser ✅
 // - button to open in browser
@@ -79,12 +81,12 @@ function getRandomNote(allNotes) {
 
 async function openUrlInBrowser(url) {
 	logInfo('✨ Opening note in your default browser... ✨');
-	// await open(url);
+	await open(url);
 }
 
 (async () => {
 	init();
-	input.includes(`help`) && cli.showHelp(0);
+	~input.includes(`help`) && cli.showHelp(0);
 	debug && logInfo(flags);
 	databaseId = await getRandomeDatabaseId();
 	const allNotes = await getAllNotes();

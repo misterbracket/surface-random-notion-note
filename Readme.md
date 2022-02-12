@@ -17,5 +17,16 @@ Alternatively you can install this utility globally.
 ```bash
 npm i -g @maxklammer/surface-random-notion-note
 
+// To run the utility
+ surface
+ // or
+ surface-random-notion-note
+
 ```
-# surface-random-notion-note
+
+## Configuration
+
+You need to add an integration your notion account and share the pages that contain the databases with the integration.
+The token can be put in a file for save keeping.
+
+If you prefer to store you notion integration key in a file you can place it in your terminal rc file of your choice. This might be `.zshrrc` or `.bashrc`, depending on the shell you use.

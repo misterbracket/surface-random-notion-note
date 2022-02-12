@@ -1,8 +1,12 @@
 {
-	"name": "surface-random-notion-note",
+	"name": "@maxklammer/surface-random-notion-note",
 	"description": "Will open a random notion note",
 	"version": "0.0.1",
 	"license": "UNLICENSED",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/misterbracket/surface-random-notion-note.git"
+	},
 	"bin": {
 		"surface-random-notion-note": "index.js",
 		"surface": "index.js"
