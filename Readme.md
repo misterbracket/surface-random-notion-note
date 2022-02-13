@@ -28,7 +28,13 @@ npm i -g @maxklammer/surface-random-notion-note
 
 ## Configuration
 
-You need to add an integration your notion account and share the pages that contain the databases with the integration.
-The token can be put in a file for save keeping.
+You need to add an integration your Notion account.
+Go to the Notion Setting and add an integration. Copy the integration key and place it in your shell `rc` file of your choice. This might be `.zshrc` or `.bashrc`, depending on the shell you use. 
 
-If you prefer to store you notion integration key in a file you can place it in your terminal rc file of your choice. This might be `.zshrc` or `.bashrc`, depending on the shell you use.
+```bash
+export NOTION_KEY="<your notion integration key>"
+```
+Restart your shell and run `echo $NOTION_KEY`to make sure that the key was saved properly. 
+
+Finally back in Notion, you need to share the pages that contain the databases with the integration.
+
