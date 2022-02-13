@@ -2,7 +2,9 @@
 
 ## Introduction
 
-This little utility will show you random note that you took in Notion. You can decide which databases you want to use.
+This little utility will open a random note that you took in Notion. You can decide which databases you want to use.
+
+Currently, it will only surface notes that are part of a database. 
 
 ## Usage
 
