@@ -31,20 +31,35 @@ let databaseId = '';
 // - figure out token store ✅
 // - pretty logs ✅
 // - open page in browser ✅
-// - paginate databases
+// - paginate databases ✅
+// - retrieve size of each db and show note with dirtibition.
+// - - maybe create a local cache so subsequent requests get faster?
+// - - maybe query pages directly and create a cache
 // - button to open in browser
 // - open on start up
 
-async function getRandomeDatabaseId() {
-	const response = await notion.search({
-		filter: {
-			value: 'database',
-			property: 'object'
+async function getPaginatedDatabases(currentCursor = undefined, data = []) {
+	try {
+		const response = await notion.search({
+			start_cursor: currentCursor,
+			filter: {
+				value: 'database',
+				property: 'object'
+			}
+		});
+		data.push.apply(data, response.results);
+		if (response.has_more === false) {
+			return data;
 		}
-	});
-	const randomDatabaseIdx = random(0, response.results.length);
-	const databaseId = response.results[randomDatabaseIdx].id;
-	return databaseId;
+
+		return getPaginatedDatabases(response.next_cursor, data);
+	} catch (error) {
+		logError('Something went wrong: ' + error);
+	}
+}
+
+async function getAllDatabases() {
+	return await getPaginatedDatabases();
 }
 
 async function getPaginatedNotes(currentCursor = undefined, data = []) {
@@ -64,10 +79,7 @@ async function getPaginatedNotes(currentCursor = undefined, data = []) {
 	}
 }
 async function getAllNotes() {
-	let notes = [];
-	const res = await getPaginatedNotes();
-	await notes.push.apply(notes, res.results);
-	return res;
+	return await getPaginatedNotes();
 }
 
 function getRandomNote(allNotes) {
@@ -87,7 +99,9 @@ async function openUrlInBrowser(url) {
 	init();
 	input.includes(`help`) && cli.showHelp(0);
 	debug && logInfo(flags);
-	databaseId = await getRandomeDatabaseId();
+	const allDatabases = await getAllDatabases();
+	const randomDatabaseIdx = random(0, allDatabases.length);
+	databaseId = allDatabases[randomDatabaseIdx].id;
 	const allNotes = await getAllNotes();
 	const note = getRandomNote(allNotes);
 	openUrlInBrowser(note.url);
